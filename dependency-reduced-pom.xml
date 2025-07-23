@@ -30,7 +30,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>23</maven.compiler.target>
-    <exec.mainClass>com.gui.estoque.Estoque</exec.mainClass>
+    <exec.mainClass>com.gui.estoque.view.MenuInicial</exec.mainClass>
     <maven.compiler.source>23</maven.compiler.source>
   </properties>
 </project>

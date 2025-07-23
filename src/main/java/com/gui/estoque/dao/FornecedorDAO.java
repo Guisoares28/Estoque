@@ -4,10 +4,16 @@
  */
 package com.gui.estoque.dao;
 
+import com.gui.estoque.model.FornecedorModel;
 import com.gui.estoque.util.ConnectionFactory;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +36,110 @@ public class FornecedorDAO {
 
             stmt.execute(createTable.toString());
        }
+    }
+    
+    public static FornecedorModel buscarFornecedorPorCnpj(String cnpj) throws SQLException{
+        FornecedorModel fornecedor = new FornecedorModel();
+        String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor WHERE cnpj = ?";
+        
+        if(cnpj == null || cnpj.isEmpty()){
+            JOptionPane.showMessageDialog(null, "CNPJ não pode ser vazio!",
+                            "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        
+         try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+            
+             stmt.setString(1, cnpj);
+             
+             ResultSet rs = stmt.executeQuery();
+             
+             if(rs.next()){
+                 fornecedor.setId(rs.getInt("id"));
+                 fornecedor.setNome(rs.getString("nome"));
+                 fornecedor.setTelefone(rs.getString("telefone"));
+                 fornecedor.setCnpj(rs.getString("cnpj"));
+             }
+         }
+         return fornecedor;
+    }
+    
+    
+    public static List<String> buscarTodosFornecedores() throws SQLException{
+        List<String> fornecedores = new ArrayList<>();
+        String sql = "SELECT nome FROM tb_fornecedor";
+        try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                fornecedores.add(rs.getString("nome"));
+            }
+        }
+        return fornecedores;
+        
+    }
+    
+    public static void salvarFornecedor(FornecedorModel fornecedor) throws SQLException{
+        String sql = "INSERT INTO tb_fornecedor (cnpj,nome,telefone) VALUES (?,?,?)";
+        
+        try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+            
+            stmt.setString(1, fornecedor.getCnpj());
+            stmt.setString(2, fornecedor.getNome());
+            stmt.setString(3, fornecedor.getTelefone());
+            
+            int linhasAfetadas = stmt.executeUpdate();
+            
+             if(linhasAfetadas > 0){
+               JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!",
+                            "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
+            }     
+        } 
+    }
+    
+    public static void atualizarFornecedor(String cnpj, String nomeNovo, String telefoneNovo) throws SQLException{
+        StringBuilder sql = new StringBuilder("UPDATE tb_fornecedor SET ");
+        sql.append("nome = ?, ");
+        sql.append("telefone = ? ");
+        sql.append("WHERE cnpj = ?;");
+        
+        try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql.toString())){
+            
+            stmt.setString(1, nomeNovo);
+            stmt.setString(2, telefoneNovo);
+            stmt.setString(3, cnpj);
+            
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            if(linhasAfetadas > 0){
+               JOptionPane.showMessageDialog(null, "Fornecedor atualizado com sucesso!",
+                            "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
+            }     
+            
+        }
+    }
+    
+    public static void deletarFornecedor(String nomeFornecedor) throws SQLException{
+        String sql = "DELETE FROM tb_fornecedor WHERE nome = ?";
+        
+        try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+            
+            stmt.setString(1, nomeFornecedor);
+            
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            if(linhasAfetadas > 0){
+               JOptionPane.showMessageDialog(null, "Fornecedor deletado com sucesso!",
+                            "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
+            }     
+            
+            
+        }
     }
     
 }

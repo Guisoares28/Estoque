@@ -179,12 +179,12 @@ public class f_cadastro_categoria extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_categoria_cadastroActionPerformed
 
     private void bt_atualizar_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_atualizar_categoriaActionPerformed
-        String novo_nome_categoria = txt_categoria_att.getText();
-        
+        String novo_nome_categoria = txt_categoria_att.getText().trim();
+        String antigo_nome = txt_categoria_cadastro.getText().trim();
         if(!novo_nome_categoria.isEmpty()){
             if(!novo_nome_categoria.equalsIgnoreCase(txt_categoria_cadastro.getText())){
             try {
-                CategoriaDAO.atualizarCategoria(novo_nome_categoria);
+                CategoriaDAO.atualizarCategoria(antigo_nome ,novo_nome_categoria);
                 txt_categoria_cadastro.setText(novo_nome_categoria);
                 txt_categoria_cadastro.setEditable(true);
                 txt_categoria_att.setEnabled(false);

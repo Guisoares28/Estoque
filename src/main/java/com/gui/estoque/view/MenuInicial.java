@@ -36,8 +36,9 @@ public class MenuInicial extends javax.swing.JFrame {
         menu_categoria = new javax.swing.JMenu();
         add_categoria = new javax.swing.JMenuItem();
         remove_categoria = new javax.swing.JMenuItem();
-        att_categoria = new javax.swing.JMenuItem();
         menu_fornecedor = new javax.swing.JMenu();
+        menuItem_cadastrar_fornecedor = new javax.swing.JMenuItem();
+        menuItem_deletar_fornecedor = new javax.swing.JMenuItem();
         menu_produto = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,12 +62,26 @@ public class MenuInicial extends javax.swing.JFrame {
         });
         menu_categoria.add(remove_categoria);
 
-        att_categoria.setText("Atualizar categoria");
-        menu_categoria.add(att_categoria);
-
         jMenuBar1.add(menu_categoria);
 
         menu_fornecedor.setText("Fornecedor");
+
+        menuItem_cadastrar_fornecedor.setText("Cadastrar fornecedor");
+        menuItem_cadastrar_fornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_cadastrar_fornecedorActionPerformed(evt);
+            }
+        });
+        menu_fornecedor.add(menuItem_cadastrar_fornecedor);
+
+        menuItem_deletar_fornecedor.setText("Deletar fornecedor");
+        menuItem_deletar_fornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_deletar_fornecedorActionPerformed(evt);
+            }
+        });
+        menu_fornecedor.add(menuItem_deletar_fornecedor);
+
         jMenuBar1.add(menu_fornecedor);
 
         menu_produto.setText("Produto");
@@ -101,6 +116,22 @@ public class MenuInicial extends javax.swing.JFrame {
             Logger.getLogger(MenuInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_remove_categoriaActionPerformed
+
+    private void menuItem_cadastrar_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_cadastrar_fornecedorActionPerformed
+        f_cadastrar_fornecedor cadastroFornecedor = new f_cadastrar_fornecedor();
+        cadastroFornecedor.setVisible(true);
+    }//GEN-LAST:event_menuItem_cadastrar_fornecedorActionPerformed
+
+    private void menuItem_deletar_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_deletar_fornecedorActionPerformed
+        f_deletar_fornecedor deletarFornecedor;
+        try {
+            deletarFornecedor = new f_deletar_fornecedor();
+            deletarFornecedor.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_menuItem_deletar_fornecedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,8 +175,9 @@ public class MenuInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem add_categoria;
-    private javax.swing.JMenuItem att_categoria;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuItem_cadastrar_fornecedor;
+    private javax.swing.JMenuItem menuItem_deletar_fornecedor;
     private javax.swing.JMenu menu_categoria;
     private javax.swing.JMenu menu_fornecedor;
     private javax.swing.JMenu menu_produto;
