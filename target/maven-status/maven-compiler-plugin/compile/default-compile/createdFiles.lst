@@ -2,6 +2,7 @@ com\gui\estoque\view\f_cadastro_categoria$2.class
 com\gui\estoque\dao\FornecedorDAO.class
 com\gui\estoque\view\f_cadastrar_fornecedor$8.class
 com\gui\estoque\view\f_cadastrar_fornecedor$1.class
+com\gui\estoque\view\f_cadastro_produto$5.class
 com\gui\estoque\view\f_deletar_fornecedor$1.class
 com\gui\estoque\view\f_cadastrar_fornecedor$6.class
 com\gui\estoque\view\f_cadastrar_fornecedor$3.class
@@ -10,14 +11,18 @@ com\gui\estoque\view\f_deletar_categoria.class
 Estoque.class
 com\gui\estoque\view\MenuInicial$3.class
 com\gui\estoque\view\f_cadastro_categoria$5.class
+com\gui\estoque\view\f_cadastro_produto$3.class
 com\gui\estoque\view\f_deletar_fornecedor$3.class
+com\gui\estoque\view\MenuInicial$6.class
 com\gui\estoque\view\f_cadastrar_fornecedor$5.class
 com\gui\estoque\view\f_deletar_categoria$1.class
 com\gui\estoque\view\f_deletar_categoria$3.class
 com\gui\estoque\view\f_cadastro_categoria.class
 com\gui\estoque\view\MenuInicial$1.class
+com\gui\estoque\util\ProdutoUtil.class
 com\gui\estoque\view\f_cadastrar_fornecedor$7.class
 com\gui\estoque\model\CategoriaModel.class
+com\gui\estoque\view\f_cadastro_produto$1.class
 com\gui\estoque\view\MenuInicial$2.class
 com\gui\estoque\util\ConnectionFactory.class
 com\gui\estoque\view\f_cadastrar_fornecedor.class
@@ -25,7 +30,9 @@ com\gui\estoque\view\MenuInicial$4.class
 com\gui\estoque\view\f_cadastrar_fornecedor$2.class
 com\gui\estoque\model\ProdutoModel.class
 com\gui\estoque\view\f_cadastro_categoria$3.class
+com\gui\estoque\view\f_cadastro_produto.class
 com\gui\estoque\view\f_deletar_fornecedor$2.class
+com\gui\estoque\view\f_cadastro_produto$4.class
 com\gui\estoque\view\f_deletar_fornecedor.class
 com\gui\estoque\view\f_cadastrar_fornecedor$4.class
 com\gui\estoque\util\FornecedorUtil.class
@@ -36,5 +43,6 @@ com\gui\estoque\view\f_cadastro_categoria$6.class
 com\gui\estoque\view\f_cadastro_categoria$1.class
 com\gui\estoque\model\FornecedorModel.class
 com\gui\estoque\dao\CategoriaDAO.class
+com\gui\estoque\view\f_cadastro_produto$2.class
 com\gui\estoque\view\f_deletar_categoria$2.class
 com\gui\estoque\view\MenuInicial$5.class

@@ -38,6 +38,27 @@ public class FornecedorDAO {
        }
     }
     
+    public static FornecedorModel buscarFornecedorPorNome(String nome) throws SQLException{
+       FornecedorModel fornecedor = new FornecedorModel(); 
+       String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor WHERE nome = ?";
+       
+       try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+           
+           stmt.setString(1, nome.toUpperCase());
+           ResultSet rs = stmt.executeQuery();
+           
+           if (rs.next()) {
+            fornecedor = new FornecedorModel();
+            fornecedor.setId(rs.getInt("id"));
+            fornecedor.setNome(rs.getString("nome"));
+            fornecedor.setTelefone(rs.getString("telefone"));
+            fornecedor.setCnpj(rs.getString("cnpj"));
+        }
+       }
+       return fornecedor;
+    }
+    
     public static FornecedorModel buscarFornecedorPorCnpj(String cnpj) throws SQLException{
         FornecedorModel fornecedor = new FornecedorModel();
         String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor WHERE cnpj = ?";

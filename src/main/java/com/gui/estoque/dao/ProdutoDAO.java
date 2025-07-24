@@ -4,10 +4,14 @@
  */
 package com.gui.estoque.dao;
 
+import com.gui.estoque.model.ProdutoModel;
 import com.gui.estoque.util.ConnectionFactory;
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,5 +39,35 @@ public class ProdutoDAO {
 
             stmt.execute(createTable.toString());
        }
+    }
+    
+    public static void adicionarProduto(ProdutoModel produto) throws SQLException{
+        StringBuilder sql = new StringBuilder("INSERT INTO tb_produto (");
+        
+        sql.append("descricao, ");
+        sql.append("valor_compra, ");
+        sql.append("valor_venda, ");
+        sql.append("quantidade, ");
+        sql.append("fornecedor_id, ");
+        sql.append("categoria_id) VALUES ( ");
+        sql.append("?,?,?,?,?,?);");
+        
+        try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql.toString())){
+            
+            stmt.setString(1, produto.getDescricao());
+            stmt.setBigDecimal(2, produto.getValor_compra());
+            stmt.setBigDecimal(3, produto.getValor_venda());
+            stmt.setInt(4, produto.getQuantidade());
+            stmt.setInt(5, produto.getFornecedor_id());
+            stmt.setInt(6, produto.getCategoria_id());
+            
+            int linhasAfetadas = stmt.executeUpdate();
+            
+            if(linhasAfetadas > 0){
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!",
+                            "Sucesso", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }
 }

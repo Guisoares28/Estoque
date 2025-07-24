@@ -40,6 +40,7 @@ public class MenuInicial extends javax.swing.JFrame {
         menuItem_cadastrar_fornecedor = new javax.swing.JMenuItem();
         menuItem_deletar_fornecedor = new javax.swing.JMenuItem();
         menu_produto = new javax.swing.JMenu();
+        menuItem_produto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +86,15 @@ public class MenuInicial extends javax.swing.JFrame {
         jMenuBar1.add(menu_fornecedor);
 
         menu_produto.setText("Produto");
+
+        menuItem_produto.setText("jMenuItem1");
+        menuItem_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem_produtoActionPerformed(evt);
+            }
+        });
+        menu_produto.add(menuItem_produto);
+
         jMenuBar1.add(menu_produto);
 
         setJMenuBar(jMenuBar1);
@@ -133,6 +143,17 @@ public class MenuInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuItem_deletar_fornecedorActionPerformed
 
+    private void menuItem_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_produtoActionPerformed
+        f_cadastro_produto cadastroProduto;
+        try {
+            cadastroProduto = new f_cadastro_produto();
+            cadastroProduto.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_menuItem_produtoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -178,6 +199,7 @@ public class MenuInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem menuItem_cadastrar_fornecedor;
     private javax.swing.JMenuItem menuItem_deletar_fornecedor;
+    private javax.swing.JMenuItem menuItem_produto;
     private javax.swing.JMenu menu_categoria;
     private javax.swing.JMenu menu_fornecedor;
     private javax.swing.JMenu menu_produto;

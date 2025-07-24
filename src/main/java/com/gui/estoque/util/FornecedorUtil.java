@@ -16,7 +16,7 @@ public class FornecedorUtil {
         FornecedorModel fornecedor = new FornecedorModel();
         
         fornecedor.setCnpj(cnpj);
-        fornecedor.setNome(nome);
+        fornecedor.setNome(nome.toUpperCase());
         fornecedor.setTelefone(telefone);
         
         return fornecedor;

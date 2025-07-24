@@ -162,9 +162,10 @@ public class f_cadastro_categoria extends javax.swing.JFrame {
 
     private void txt_categoria_cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_categoria_cadastroActionPerformed
         try {
-            String categoria = CategoriaDAO.buscarCategoria(txt_categoria_cadastro.getText().trim());
+            CategoriaModel categoriaModel = CategoriaDAO.buscarCategoria(txt_categoria_cadastro.getText().trim());
+            String categoria = categoriaModel.getCategoria();
             
-            if(categoria.isEmpty()){
+            if(categoria == null){
                 txt_categoria_att.setText("");
                return; 
             }

@@ -36,9 +36,10 @@ public class CategoriaDAO {
        }
     }
     
-    public static String buscarCategoria(String categoria_nome) throws SQLException{
+    public static CategoriaModel buscarCategoria(String categoria_nome) throws SQLException{
+        CategoriaModel categoria = new CategoriaModel();
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT categoria FROM tb_categoria WHERE categoria = ?");
+        sql.append("SELECT id, categoria FROM tb_categoria WHERE categoria = ?");
         
         try(Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql.toString())){
@@ -48,10 +49,11 @@ public class CategoriaDAO {
                 ResultSet rs = stmt.executeQuery();
                 
                 if(rs.next()){
-                    return rs.getString("categoria");
+                    categoria.setId(rs.getInt("id"));
+                    categoria.setCategoria(rs.getString("categoria"));
                 }   
         }
-        return "";
+        return categoria;
     }
     
     public static List<String> buscarCategorias() throws SQLException{
