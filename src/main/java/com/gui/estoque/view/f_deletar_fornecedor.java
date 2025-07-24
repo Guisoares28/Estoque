@@ -5,7 +5,10 @@
 package com.gui.estoque.view;
 
 import com.gui.estoque.dao.FornecedorDAO;
+import com.gui.estoque.model.FornecedorModel;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,14 +18,22 @@ import javax.swing.JOptionPane;
  * @author Guilherme
  */
 public class f_deletar_fornecedor extends javax.swing.JFrame {
-
-    /**
-     * Creates new form f_deletar_fornecedor
-     */
-    public f_deletar_fornecedor() throws SQLException {
+    
+    private List<FornecedorModel> fornecedores = FornecedorDAO.buscarTodosFornecedores();
+    
+    public f_deletar_fornecedor(Integer id) throws SQLException {
         initComponents();
-        this.setLocationRelativeTo(null);
-        FornecedorDAO.buscarTodosFornecedores().forEach(cb_deletar_fornecedor::addItem);
+        
+        if(id == null){
+            txt_id_deletar_fornecedor.setText("");
+        }else{
+            txt_id_deletar_fornecedor.setText(id.toString());
+        }
+        
+        this.setLocationRelativeTo(null);   
+        txt_nome_deletar_fornecedor.setEditable(false);
+        txt_telefone_deletar_fornecedor.setEditable(false);
+        txt_cnpj_deletar_fornecedor.setEditable(false);
     }
 
     /**
@@ -34,16 +45,19 @@ public class f_deletar_fornecedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cb_deletar_fornecedor = new javax.swing.JComboBox<>();
         bt_deletar_fornecedor = new javax.swing.JButton();
         bt_voltar_deletar_fornecedor = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txt_id_deletar_fornecedor = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt_nome_deletar_fornecedor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txt_telefone_deletar_fornecedor = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txt_cnpj_deletar_fornecedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Fornecedor:");
-
-        cb_deletar_fornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha um fornecedor" }));
 
         bt_deletar_fornecedor.setText("Deletar");
         bt_deletar_fornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +73,27 @@ public class f_deletar_fornecedor extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Codigo:");
+
+        txt_id_deletar_fornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_id_deletar_fornecedorActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Nome:");
+
+        jLabel1.setText("Telefone:");
+
+        jLabel4.setText("Cnpj:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,23 +102,49 @@ public class f_deletar_fornecedor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb_deletar_fornecedor, 0, 180, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(bt_voltar_deletar_fornecedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bt_deletar_fornecedor)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                        .addComponent(bt_deletar_fornecedor))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_id_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_nome_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_telefone_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_cnpj_deletar_fornecedor)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_id_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_nome_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cb_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                    .addComponent(txt_telefone_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_cnpj_deletar_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_deletar_fornecedor)
                     .addComponent(bt_voltar_deletar_fornecedor))
@@ -94,26 +155,59 @@ public class f_deletar_fornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_deletar_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deletar_fornecedorActionPerformed
-
-        var nomeFornecedor = cb_deletar_fornecedor.getSelectedItem();
-        
-        if(nomeFornecedor == null || nomeFornecedor.toString().equalsIgnoreCase("Escolha um fornecedor")){
-          JOptionPane.showMessageDialog(null, "Nome não pode ser vazio!",
-                            "Falha", JOptionPane.ERROR_MESSAGE); 
-          return;
-        }
+        String nome = txt_nome_deletar_fornecedor.getText();
         try {
-            FornecedorDAO.deletarFornecedor(nomeFornecedor.toString().trim());
-            cb_deletar_fornecedor.removeAllItems();
-            FornecedorDAO.buscarTodosFornecedores().forEach(cb_deletar_fornecedor::addItem);
+            FornecedorDAO.deletarFornecedor(nome);
+            txt_nome_deletar_fornecedor.setText("");
+            txt_telefone_deletar_fornecedor.setText("");
+            txt_cnpj_deletar_fornecedor.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(f_deletar_fornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
     }//GEN-LAST:event_bt_deletar_fornecedorActionPerformed
 
     private void bt_voltar_deletar_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_deletar_fornecedorActionPerformed
         this.dispose();
     }//GEN-LAST:event_bt_voltar_deletar_fornecedorActionPerformed
+
+    private void txt_id_deletar_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_deletar_fornecedorActionPerformed
+        String idString = txt_id_deletar_fornecedor.getText();
+        
+        if(idString == null || idString.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Id não pode ser vazio!",
+                            "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Integer idInt = Integer.parseInt(idString);
+       
+        try {
+            FornecedorModel fornecedor = FornecedorDAO.buscarFornecedorPorId(idInt);
+            
+            if(fornecedor.getNome() == null || fornecedor.getNome().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Fornecedor não encontrado!",
+                            "Aviso", JOptionPane.WARNING_MESSAGE);
+            }else{
+                txt_nome_deletar_fornecedor.setText(fornecedor.getNome());
+                txt_telefone_deletar_fornecedor.setText(fornecedor.getTelefone());
+                txt_cnpj_deletar_fornecedor.setText(fornecedor.getCnpj());
+            }
+            
+           
+            
+            
+            
+                    } catch (SQLException ex) {
+            Logger.getLogger(f_deletar_fornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txt_id_deletar_fornecedorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        f_listar_forncedores listarFornecedores = new f_listar_forncedores();
+        listarFornecedores.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +240,7 @@ public class f_deletar_fornecedor extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new f_deletar_fornecedor().setVisible(true);
+                    new f_deletar_fornecedor(null).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(f_deletar_fornecedor.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -157,7 +251,14 @@ public class f_deletar_fornecedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_deletar_fornecedor;
     private javax.swing.JButton bt_voltar_deletar_fornecedor;
-    private javax.swing.JComboBox<String> cb_deletar_fornecedor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txt_cnpj_deletar_fornecedor;
+    private javax.swing.JTextField txt_id_deletar_fornecedor;
+    private javax.swing.JTextField txt_nome_deletar_fornecedor;
+    private javax.swing.JTextField txt_telefone_deletar_fornecedor;
     // End of variables declaration//GEN-END:variables
 }

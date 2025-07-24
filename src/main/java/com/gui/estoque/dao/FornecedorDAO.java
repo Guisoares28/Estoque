@@ -59,6 +59,28 @@ public class FornecedorDAO {
        return fornecedor;
     }
     
+    
+    public static List<FornecedorModel> buscarFornecedorPorContainNome(String nome) throws SQLException{
+       String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor WHERE nome ILIKE ?";
+       List<FornecedorModel> fornecedores = new ArrayList<>();
+       try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+           
+           stmt.setString(1, "%" + nome.toUpperCase() + "%");
+           ResultSet rs = stmt.executeQuery();
+                
+           while (rs.next()) {
+            FornecedorModel fornecedor = new FornecedorModel();
+            fornecedor.setId(rs.getInt("id"));
+            fornecedor.setNome(rs.getString("nome"));
+            fornecedor.setTelefone(rs.getString("telefone"));
+            fornecedor.setCnpj(rs.getString("cnpj"));
+            fornecedores.add(fornecedor);
+        }
+       }
+       return fornecedores;
+    }
+    
     public static FornecedorModel buscarFornecedorPorCnpj(String cnpj) throws SQLException{
         FornecedorModel fornecedor = new FornecedorModel();
         String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor WHERE cnpj = ?";
@@ -85,17 +107,48 @@ public class FornecedorDAO {
          return fornecedor;
     }
     
+    public static FornecedorModel buscarFornecedorPorId(Integer id) throws SQLException{
+        FornecedorModel fornecedor = new FornecedorModel();
+        String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor WHERE id = ?";
+        
+        if(id == null){
+            JOptionPane.showMessageDialog(null, "Id não pode ser vazio!",
+                            "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        
+         try(Connection conexao = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conexao.prepareStatement(sql)){
+            
+             stmt.setInt(1, id);
+             
+             ResultSet rs = stmt.executeQuery();
+             
+             if(rs.next()){
+                 fornecedor.setId(rs.getInt("id"));
+                 fornecedor.setNome(rs.getString("nome"));
+                 fornecedor.setTelefone(rs.getString("telefone"));
+                 fornecedor.setCnpj(rs.getString("cnpj"));
+             }
+         }
+         return fornecedor;
+    }
     
-    public static List<String> buscarTodosFornecedores() throws SQLException{
-        List<String> fornecedores = new ArrayList<>();
-        String sql = "SELECT nome FROM tb_fornecedor";
+    
+    public static List<FornecedorModel> buscarTodosFornecedores() throws SQLException{
+        List<FornecedorModel> fornecedores = new ArrayList<>();
+        String sql = "SELECT id, nome, telefone, cnpj FROM tb_fornecedor";
         try(Connection conexao = ConnectionFactory.getConnection();
                 PreparedStatement stmt = conexao.prepareStatement(sql)){
             
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
-                fornecedores.add(rs.getString("nome"));
+                FornecedorModel newFornecedor = new FornecedorModel();
+                newFornecedor.setId(rs.getInt("id"));
+                newFornecedor.setNome(rs.getString("nome"));
+                newFornecedor.setTelefone(rs.getString("telefone"));
+                newFornecedor.setCnpj(rs.getString("cnpj"));
+                fornecedores.add(newFornecedor);
             }
         }
         return fornecedores;

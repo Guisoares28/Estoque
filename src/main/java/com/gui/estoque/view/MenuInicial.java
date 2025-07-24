@@ -135,7 +135,7 @@ public class MenuInicial extends javax.swing.JFrame {
     private void menuItem_deletar_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem_deletar_fornecedorActionPerformed
         f_deletar_fornecedor deletarFornecedor;
         try {
-            deletarFornecedor = new f_deletar_fornecedor();
+            deletarFornecedor = new f_deletar_fornecedor(null);
             deletarFornecedor.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(MenuInicial.class.getName()).log(Level.SEVERE, null, ex);

@@ -27,7 +27,7 @@ public class f_cadastro_produto extends javax.swing.JFrame {
     public f_cadastro_produto() throws SQLException {
         initComponents();
         setLocationRelativeTo(null);
-        FornecedorDAO.buscarTodosFornecedores().forEach(cb_fornecedor_cadastro::addItem);
+        FornecedorDAO.buscarTodosFornecedores().forEach(f -> cb_fornecedor_cadastro.addItem(f.getNome()));
         CategoriaDAO.buscarCategorias().forEach(cb_categoria_cadastro::addItem);
     }
 
